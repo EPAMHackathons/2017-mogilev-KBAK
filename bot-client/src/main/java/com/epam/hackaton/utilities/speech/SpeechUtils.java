@@ -10,13 +10,50 @@ import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 import javax.speech.synthesis.Voice;
 
+import com.epam.hackaton.bot.skype.BotSingleton;
+
 public class SpeechUtils {
 
 	SynthesizerModeDesc desc;
 	Synthesizer synthesizer;
 	Voice voice;
 
-	public void init(String voiceName) throws EngineException, AudioException, EngineStateError, PropertyVetoException {
+	private static SpeechUtils su = null;
+
+	public static SpeechUtils getInstance() {
+		if(su == null) {
+			su = new SpeechUtils();
+			try {
+				su.init("kevin16");
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		}
+		return su;
+	}
+
+	public static void speakMsg(String msg) {
+		if(BotSingleton.isSoundEnabled()) {
+			try {
+				getInstance().doSpeak(msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void terminateSpeaker() {
+		if(su != null) {
+			try {
+				su.terminate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void init(String voiceName) throws EngineException, AudioException, EngineStateError, PropertyVetoException {
 		if (desc == null) {
 			System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
 			desc = new SynthesizerModeDesc(Locale.US);
@@ -37,11 +74,11 @@ public class SpeechUtils {
 		}
 	}
 
-	public void terminate() throws EngineException, EngineStateError {
+	private void terminate() throws EngineException, EngineStateError {
 		synthesizer.deallocate();
 	}
 
-	public void doSpeak(String speakText)
+	private void doSpeak(String speakText)
 			throws EngineException, AudioException, IllegalArgumentException, InterruptedException {
 		synthesizer.speakPlainText(speakText, null);
 		synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
@@ -50,7 +87,7 @@ public class SpeechUtils {
 	public static void main(String[] args) throws Exception {
 		SpeechUtils su = new SpeechUtils();
 		su.init("kevin16");
-		su.doSpeak("Hello world!");
+		su.doSpeak("Hello");
 		su.terminate();
 	}
 }
