@@ -16,8 +16,8 @@ public class CheckJobsBackgroundActivity extends BaseCheckJobsActivity {
 
 		String resultOfChecking = getJobsResult();
 
-		BotSingleton.informUser("Result");
 		if(UNSUCCESSFUL_RESULT.contains(resultOfChecking)) {
+			BotSingleton.informUser("Result");
 			System.out.println(resultOfChecking);
 		} else {
 			SpeechUtils.speakMsg("Found!");
