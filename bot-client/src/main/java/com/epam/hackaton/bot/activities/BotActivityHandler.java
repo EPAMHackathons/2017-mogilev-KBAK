@@ -3,11 +3,7 @@ package com.epam.hackaton.bot.activities;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.epam.hackaton.bot.activities.wb.AddToWaitListActivity;
-import com.epam.hackaton.bot.activities.wb.CheckJobsActivity;
-import com.epam.hackaton.bot.activities.wb.CreateWaitPriceJobActivity;
-import com.epam.hackaton.bot.activities.wb.CreateWaitSizeJobActivity;
-import com.epam.hackaton.bot.activities.wb.DoNotKnowActivity;
+import com.epam.hackaton.bot.activities.wb.*;
 import com.epam.hackaton.bot.skype.BotSingleton;
 
 public class BotActivityHandler {
@@ -18,6 +14,7 @@ public class BotActivityHandler {
 	public static final String SIZE = "SIZE";
 	public static final String PRICE = "PRICE";
 	public static final String CHECK = "CHECK";
+	public static final String HELLO = "HELLO";
 
 	public static void defaultBotActivity() {
 		System.out.println("Default Bot Activity");
@@ -40,6 +37,7 @@ public class BotActivityHandler {
 		activities.put(SIZE, new CreateWaitSizeJobActivity());
 		activities.put(PRICE, new CreateWaitPriceJobActivity());
 		activities.put(CHECK, new CheckJobsActivity());
+		activities.put(HELLO, new HelloActivity());
 		return activities;
 	}
 
