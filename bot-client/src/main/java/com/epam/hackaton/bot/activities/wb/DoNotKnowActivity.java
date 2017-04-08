@@ -24,7 +24,7 @@ public class DoNotKnowActivity implements BotActivity {
 
 		} else if(!botMessageWasAlreadySent(LET_ME_HELP)) {
 			BotSingleton.informUser(LET_ME_HELP);
-			BotUtils.sendMessage(skype, "WB LAMODA ..."); //TODO:
+			BotUtils.sendMessage(skype, "WB LAMODA ...\n" + "Wait for <url>"); //TODO:
 		} else {
 
 			BotSingleton.informUser(FACEPALM);

@@ -26,7 +26,7 @@ import javafx.stage.WindowEvent;
 
 public class StartWindow extends Application {
 
-	public static final String DEFAULT_USER_TO_WRITE = "live:aleks.anna.ur";
+	public static final String DEFAULT_USER_TO_WRITE = "hanna.aliakseichykava"; //"live:aleks.anna.ur";
 	public static final String DEFAULT_ARDUINO_PORT = "COM7";
 
 	public static void main(String[] args) throws Exception {

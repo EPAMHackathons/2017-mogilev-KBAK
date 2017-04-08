@@ -3,17 +3,17 @@ package com.epam.hackaton.bot.activities;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.epam.hackaton.bot.activities.wb.AddToWaitListActivity;
+import com.epam.hackaton.bot.activities.wb.CreateWaitSizeJobActivity;
 import com.epam.hackaton.bot.activities.wb.DoNotKnowActivity;
-import com.epam.hackaton.bot.activities.wb.LamodaWaitListActivity;
-import com.epam.hackaton.bot.activities.wb.WBWaitListActivity;
 import com.epam.hackaton.bot.skype.BotSingleton;
-import com.epam.hackaton.bot.skype.BotUtils;
-import com.epam.hackaton.utilities.speech.SpeechUtils;
-import com.samczsun.skype4j.Skype;
 
 public class BotActivityHandler {
 
 	private static final Map<String, BotActivity> AVAILABLE_ACTIVITIES = getAvailableActivities();
+
+	public static final String WAIT = "WAIT";
+	public static final String SIZE = "SIZE";
 
 	public static void defaultBotActivity() {
 		System.out.println("Default Bot Activity");
@@ -30,9 +30,8 @@ public class BotActivityHandler {
 
 	private static Map<String, BotActivity> getAvailableActivities() {
 		Map<String, BotActivity> activities = new HashMap<String, BotActivity>();
-		activities.put("WB", new WBWaitListActivity());
-		activities.put("WILDBERRIES", new WBWaitListActivity());
-		activities.put("LAMODA", new LamodaWaitListActivity());
+		activities.put("WAIT", new AddToWaitListActivity());
+		activities.put("SIZE", new CreateWaitSizeJobActivity());
 		return activities;
 	}
 
