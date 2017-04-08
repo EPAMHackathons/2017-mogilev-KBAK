@@ -3,7 +3,11 @@ package com.epam.hackaton.bot.activities;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.epam.hackaton.bot.activities.wb.*;
+import com.epam.hackaton.bot.activities.wb.AddToWaitListActivity;
+import com.epam.hackaton.bot.activities.wb.CheckJobsActivity;
+import com.epam.hackaton.bot.activities.wb.CreateWaitPriceJobActivity;
+import com.epam.hackaton.bot.activities.wb.CreateWaitSizeJobActivity;
+import com.epam.hackaton.bot.activities.wb.DoNotKnowActivity;
 import com.epam.hackaton.bot.skype.BotSingleton;
 
 public class BotActivityHandler {
