@@ -1,7 +1,6 @@
 package com.epam.hackaton.bot.skype;
 
 import java.io.File;
-import java.net.SocketTimeoutException;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -88,13 +87,17 @@ public class BotFactory {
 				//!!!!!!!!!!!!!
 				@EventHandler
 				public void onMessage(MessageEvent e) throws ConnectionException {
-					if( e.getMessage().getSender().getDisplayName().equals(BOT_DISPLAY_NAME)) {
-						System.out.println("BOT Message: [" + e.getMessage().getContent() + "] sent by " + e.getMessage().getSender().getDisplayName());
+					String msg = e.getMessage().getContent().toString();
+
+					if(e.getMessage().getSender().getDisplayName().equals(BOT_DISPLAY_NAME)) {
+						System.out.println("BOT Message: [" + msg + "] sent by " + e.getMessage().getSender().getDisplayName());
+						BotSingleton.pushBotMsg(msg);
 					} else {
-						System.out.println("Incoming Message: [" + e.getMessage().getContent() + "] sent by " + 
+						System.out.println("Incoming Message: [" + msg + "] sent by " + 
 								e.getMessage().getSender().getDisplayName() + " [" + e.getMessage().getSender().getUsername() + "]");
 
-						BotActivityHandler.onIncomingMessage(e.getMessage().getSender().getUsername(), e.getMessage().getContent().toString());
+						BotSingleton.pushUserMsg(msg);
+						BotActivityHandler.onIncomingMessage(e.getMessage().getSender().getUsername(), msg);
 					}
 				}
 
