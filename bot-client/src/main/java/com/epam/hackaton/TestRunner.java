@@ -28,6 +28,5 @@ public class TestRunner {
         */
         SendService sendService = new SendService();
         System.out.println(sendService.sendGet("http://localhost:8080/check"));
-
     }
 }

@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 /**
  * Created by Katsiaryna_Novikava on 4/8/2017.
@@ -80,6 +79,5 @@ public class SendService {
         }
 
         return result;
-
     }
 }
