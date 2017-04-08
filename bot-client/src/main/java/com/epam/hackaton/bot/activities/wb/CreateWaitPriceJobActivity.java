@@ -23,9 +23,8 @@ public class CreateWaitPriceJobActivity extends BaseShopActivity {
 		String shop = getShop(url);
 
 		JobService jobService = new JobService();
-		//TODO:
-		//System.out.println("Create Job: " + JobType.GETTING_ITEM_DETAILS.name() + ", " + shop + ", " + url + ", " + GoalType.SIZE_WAITING.name() + ", " + price);
-		//jobService.createJobWithGoals(JobType.GETTING_ITEM_DETAILS.name(), shop, url, GoalType.SIZE_WAITING.name(), price);
+		System.out.println("Create Job: " + JobType.GETTING_ITEM_DETAILS.name() + ", " + shop + ", " + url + ", " + GoalType.COST_WAITING.name() + ", " + price);
+		jobService.createJobWithGoals(JobType.GETTING_ITEM_DETAILS.name(), shop, url, GoalType.SIZE_WAITING.name(), price);
 
 		BotUtils.sendMessage(skype, "You will be informed if PRICE is below [" + price + "] for [" + url + "]");
 		SpeechUtils.speakMsg("We remember your choice");
