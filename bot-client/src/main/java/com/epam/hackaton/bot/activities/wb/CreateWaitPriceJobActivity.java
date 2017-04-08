@@ -10,23 +10,24 @@ import com.epam.hackaton.service.JobService;
 import com.epam.hackaton.utilities.speech.SpeechUtils;
 import com.samczsun.skype4j.Skype;
 
-public class CreateWaitSizeJobActivity extends BaseShopActivity {
+public class CreateWaitPriceJobActivity extends BaseShopActivity {
 
 	@Override
 	public void handle(String user, String msg) {
-		System.out.println("Create Size Job Activity ...");
+		System.out.println("Create Price Job Activity ...");
 		Skype skype = BotSingleton.getSkypeInstance();
 
 		List<String> userMessages = BotSingleton.getUserMessages();
-		String size = getSize(userMessages);
+		String price = getPrice(userMessages);
 		String url = getUrl(userMessages);
 		String shop = getShop(url);
 
 		JobService jobService = new JobService();
-		System.out.println("Create Job: " + JobType.GETTING_ITEM_DETAILS.name() + ", " + shop + ", " + url + ", " + GoalType.SIZE_WAITING.name() + ", " + size);
-		jobService.createJobWithGoals(JobType.GETTING_ITEM_DETAILS.name(), shop, url, GoalType.SIZE_WAITING.name(), size);
+		//TODO:
+		//System.out.println("Create Job: " + JobType.GETTING_ITEM_DETAILS.name() + ", " + shop + ", " + url + ", " + GoalType.SIZE_WAITING.name() + ", " + price);
+		//jobService.createJobWithGoals(JobType.GETTING_ITEM_DETAILS.name(), shop, url, GoalType.SIZE_WAITING.name(), price);
 
-		BotUtils.sendMessage(skype, "You will be informed if SIZE [" + size + "] is available for [" + url + "]");
+		BotUtils.sendMessage(skype, "You will be informed if PRICE is below [" + price + "] for [" + url + "]");
 		SpeechUtils.speakMsg("We remember your choice");
 		BotUtils.sendMessage(skype, "You can press the [BUTTON] to get status instantly");
 

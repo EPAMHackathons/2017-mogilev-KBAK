@@ -13,8 +13,8 @@ public class AddToWaitListActivity implements BotActivity {
 		System.out.println("Wait Activity ...");
 		Skype skype = BotSingleton.getSkypeInstance();
 
-		BotUtils.sendMessage(skype, "Please, enter size in the format <SIZE=...>");
-		SpeechUtils.speakMsg("Please, enter size");
+		BotUtils.sendMessage(skype, "Please, enter size in the format <SIZE=...> or expected price in the format <PRICE=>");
+		SpeechUtils.speakMsg("Please, enter size or price to wait");
 	}
 
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.epam.hackaton.bot.activities.wb.AddToWaitListActivity;
+import com.epam.hackaton.bot.activities.wb.CheckJobsActivity;
+import com.epam.hackaton.bot.activities.wb.CreateWaitPriceJobActivity;
 import com.epam.hackaton.bot.activities.wb.CreateWaitSizeJobActivity;
 import com.epam.hackaton.bot.activities.wb.DoNotKnowActivity;
 import com.epam.hackaton.bot.skype.BotSingleton;
@@ -14,11 +16,15 @@ public class BotActivityHandler {
 
 	public static final String WAIT = "WAIT";
 	public static final String SIZE = "SIZE";
+	public static final String PRICE = "PRICE";
+	public static final String CHECK = "CHECK";
 
 	public static void defaultBotActivity() {
 		System.out.println("Default Bot Activity");
 
 		BotSingleton.informUser("Don't press so hard!");
+
+		new CheckJobsActivity().handle(BotSingleton.getCurrentUserToChat(), "");
 	}
 
 	public static void onIncomingMessage(String user, String msg) {
@@ -30,8 +36,10 @@ public class BotActivityHandler {
 
 	private static Map<String, BotActivity> getAvailableActivities() {
 		Map<String, BotActivity> activities = new HashMap<String, BotActivity>();
-		activities.put("WAIT", new AddToWaitListActivity());
-		activities.put("SIZE", new CreateWaitSizeJobActivity());
+		activities.put(WAIT, new AddToWaitListActivity());
+		activities.put(SIZE, new CreateWaitSizeJobActivity());
+		activities.put(PRICE, new CreateWaitPriceJobActivity());
+		activities.put(CHECK, new CheckJobsActivity());
 		return activities;
 	}
 
