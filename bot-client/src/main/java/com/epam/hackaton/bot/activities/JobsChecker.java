@@ -16,7 +16,9 @@ public class JobsChecker implements Runnable {
 	@Override
 	public void run() {
 
-		try {
+	try {
+			Thread.sleep(10000);
+
 			while(true) {
 				System.out.println("Check jobs for [" + user + "] ...");
 				new CheckJobsBackgroundActivity().handle(BotSingleton.getCurrentUserToChat(), "");
