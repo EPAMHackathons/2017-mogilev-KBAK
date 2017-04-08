@@ -32,6 +32,5 @@ public class JobService {
         String goalRequestBody = jobHelper.createGoalsRequestBody(goalType, data);
 
         HttpResponse goalsResponse = sendService.sendPost(goalsUrl, goalRequestBody);
-
     }
 }
