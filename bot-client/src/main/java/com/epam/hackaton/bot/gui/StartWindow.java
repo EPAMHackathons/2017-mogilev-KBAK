@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import com.epam.hackaton.bot.gui.listeners.ApplicationStartHandler;
 import com.epam.hackaton.bot.skype.BotSingleton;
+import com.epam.hackaton.serialport.SerialPortListener;
 import com.epam.hackaton.utilities.speech.SpeechUtils;
 import com.samczsun.skype4j.Skype;
 import com.samczsun.skype4j.Visibility;
@@ -127,6 +128,8 @@ public class StartWindow extends Application {
 					skype.logout();
 
 					SpeechUtils.terminateSpeaker();
+
+					SerialPortListener.closeCurrentPort();
 
 					stop();
 

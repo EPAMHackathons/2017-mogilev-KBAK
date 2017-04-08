@@ -24,6 +24,8 @@ public class SerialPortListener implements SerialPortEventListener {
 	private OutputStream output;
 	private static final int TIME_OUT = 2000;
 	private static final int DATA_RATE = 9600;
+	
+	private static SerialPort CURRENT_PORT = null;
 
 	public void initialize(String port) {
 
@@ -58,6 +60,8 @@ public class SerialPortListener implements SerialPortEventListener {
 
 			serialPort.addEventListener(this);
 			serialPort.notifyOnDataAvailable(true);
+
+			CURRENT_PORT = serialPort;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.toString());
@@ -68,6 +72,13 @@ public class SerialPortListener implements SerialPortEventListener {
 		if (serialPort != null) {
 			serialPort.removeEventListener();
 			serialPort.close();
+		}
+	}
+
+	public static synchronized void closeCurrentPort() {
+		if (CURRENT_PORT != null) {
+			CURRENT_PORT.removeEventListener();
+			CURRENT_PORT.close();
 		}
 	}
 

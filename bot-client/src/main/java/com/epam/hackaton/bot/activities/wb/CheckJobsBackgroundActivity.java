@@ -5,7 +5,7 @@ import com.epam.hackaton.bot.skype.BotUtils;
 import com.epam.hackaton.utilities.speech.SpeechUtils;
 import com.samczsun.skype4j.Skype;
 
-public class CheckJobsActivity extends BaseCheckJobsActivity {
+public class CheckJobsBackgroundActivity extends BaseCheckJobsActivity {
 
 	private static final String UNSUCCESSFUL_RESULT = "No completed jobs founded.";
 
@@ -18,12 +18,12 @@ public class CheckJobsActivity extends BaseCheckJobsActivity {
 
 		BotSingleton.informUser("Result");
 		if(UNSUCCESSFUL_RESULT.contains(resultOfChecking)) {
-			BotSingleton.informUser("Nothing is found");
-			BotUtils.sendMessage(skype, "(red)"); 
+			System.out.println(resultOfChecking);
 		} else {
-			SpeechUtils.speakMsg("Found");
+			SpeechUtils.speakMsg("Found!");
 			BotUtils.sendMessage(skype, "(monkey)");
 			BotUtils.sendMessage(skype, resultOfChecking); 
 		}
 	}
 }
+
