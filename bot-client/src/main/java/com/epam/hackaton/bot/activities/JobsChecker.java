@@ -1,8 +1,11 @@
 package com.epam.hackaton.bot.activities;
 
+import com.epam.hackaton.bot.activities.wb.CheckJobsActivity;
+import com.epam.hackaton.bot.skype.BotSingleton;
+
 public class JobsChecker implements Runnable {
 
-	private static final int INTERVAL = 5000;
+	private static final int INTERVAL = 60000;
 
 	private String user;
 
@@ -16,6 +19,7 @@ public class JobsChecker implements Runnable {
 		try {
 			while(true) {
 				System.out.println("Check jobs for [" + user + "] ...");
+				new CheckJobsActivity().handle(BotSingleton.getCurrentUserToChat(), "");
 				Thread.sleep(INTERVAL);
 			}
 
