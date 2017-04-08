@@ -12,25 +12,43 @@ import com.samczsun.skype4j.Skype;
 
 public class CreateWaitPriceJobActivity extends BaseShopActivity {
 
-	@Override
-	public void handle(String user, String msg) {
-		System.out.println("Create Price Job Activity ...");
-		Skype skype = BotSingleton.getSkypeInstance();
+    @Override
+    public void handle(String user, String msg) {
+        System.out.println("Create Price Job Activity ...");
+        Skype skype = BotSingleton.getSkypeInstance();
 
-		List<String> userMessages = BotSingleton.getUserMessages();
-		String price = getPrice(userMessages);
-		String url = getUrl(userMessages);
-		String shop = getShop(url);
+        List<String> userMessages = BotSingleton.getUserMessages();
+        String price = getPrice(userMessages);
 
-		JobService jobService = new JobService();
-		System.out.println("Create Job: " + JobType.GETTING_ITEM_DETAILS.name() + ", " + shop + ", " + url + ", " + GoalType.COST_WAITING.name() + ", " + price);
-		jobService.createJobWithGoals(JobType.GETTING_ITEM_DETAILS.name(), shop, url, GoalType.SIZE_WAITING.name(), price);
+        if (!price.isEmpty()) {
 
-		BotUtils.sendMessage(skype, "You will be informed if PRICE is below [" + price + "] for [" + url + "]");
-		SpeechUtils.speakMsg("We remember your choice");
-		BotUtils.sendMessage(skype, "You can press the [BUTTON] to get status instantly");
+            String url = getUrl(userMessages);
 
-		BotSingleton.clearUserMessages();
-		BotSingleton.clearBotMessages();
-	}
+            if (!url.isEmpty()) {
+                String shop = getShop(url);
+
+                JobService jobService = new JobService();
+                System.out.println("Create Job: " + JobType.GETTING_ITEM_DETAILS.name() + ", " + shop + ", " + url + ", " + GoalType.COST_WAITING.name() + ", " + price);
+                jobService.createJobWithGoals(JobType.GETTING_ITEM_DETAILS.name(), shop, url, GoalType.SIZE_WAITING.name(), price);
+
+                BotUtils.sendMessage(skype, "You will be informed if PRICE is below [" + price + "] for [" + url + "]");
+                SpeechUtils.speakMsg("We remember your choice");
+                BotUtils.sendMessage(skype, "You can press the [BUTTON] to get status instantly");
+
+                BotSingleton.clearUserMessages();
+                BotSingleton.clearBotMessages();
+            } else {
+
+                deleteIncorrectUrl(userMessages);
+
+                BotUtils.sendMessage(skype, "Please, enter Wait for <url>");
+            }
+
+        } else {
+
+            deleteIncorrectInput(userMessages);
+
+            BotUtils.sendMessage(skype, "Please, enter expected price in the format <PRICE=>");
+        }
+    }
 }
