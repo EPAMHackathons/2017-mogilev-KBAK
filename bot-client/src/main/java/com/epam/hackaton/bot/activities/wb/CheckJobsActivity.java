@@ -2,12 +2,11 @@ package com.epam.hackaton.bot.activities.wb;
 
 import com.epam.hackaton.bot.activities.BotActivity;
 
-public class WBWaitListActivity implements BotActivity {
+public class CheckJobsActivity implements BotActivity {
 
 	@Override
 	public void handle(String user, String msg) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Check jobs Activity ...");
+		//TODO:
 	}
-
 }
