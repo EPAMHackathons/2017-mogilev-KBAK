@@ -48,32 +48,38 @@ public class SendService {
         return response;
     }
 
-    public HttpResponse sendGet (String url) {
+    public String sendGet(String url) {
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpResponse response = null;
+        String result = null;
 
         try {
             HttpGet request = new HttpGet(url);
-//
-//            StringEntity params = new StringEntity(body);
-//
-//            request.addHeader("content-type", "application/json");
-//            request.addHeader("Accept", "application/json");
-//            request.setEntity(params);
 
             response = httpClient.execute(request);
 
+            BufferedReader rd = new BufferedReader(new InputStreamReader(
+                    response.getEntity().getContent()));
+
+            String line;
+            while ((line = rd.readLine()) != null) {
+
+                JSONObject obj = new JSONObject(line);
+
+                result = obj.get("result").toString();
+            }
+
         } catch (Exception ex) {
 
-            System.out.println("Exception in sending post request" + ex);
+            System.out.println("Exception in sending get request" + ex);
 
         } finally {
 
             httpClient.getConnectionManager().shutdown();
         }
 
-        return response;
+        return result;
 
     }
 }

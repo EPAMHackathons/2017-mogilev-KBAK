@@ -5,11 +5,13 @@ import com.epam.hackaton.service.JobService;
 import com.epam.hackaton.service.SendService;
 import org.apache.http.HttpResponse;
 
+import java.io.IOException;
+
 /**
  * Created by Katsiaryna_Novikava on 4/8/2017.
  */
 public class TestRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Good luck, KVAK!");
 
      /*   JobHelper jobHelper = new JobHelper();
@@ -25,8 +27,7 @@ public class TestRunner {
                 "XXL");
         */
         SendService sendService = new SendService();
-        JobHelper jobHelper = new JobHelper();
-        HttpResponse res = sendService.sendGet("http://localhost:8080/check");
-        System.out.println(jobHelper.getValue(res));
+        System.out.println(sendService.sendGet("http://localhost:8080/check"));
+
     }
 }
