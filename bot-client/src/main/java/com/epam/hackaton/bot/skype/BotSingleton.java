@@ -14,7 +14,8 @@ public class BotSingleton {
 
 	private static String currentUserToChat;
 
-	private static List<String> messages = new ArrayList<String>();
+	private static List<String> userMessages = new ArrayList<String>();
+	private static List<String> botMessages = new ArrayList<String>();
 
 	public static Skype getSkypeInstance() {
 		if(skype == null) {
@@ -39,16 +40,28 @@ public class BotSingleton {
 		BotSingleton.currentUserToChat = currentUserToChat;
 	}
 
-	public static void pushMsg(String msg) {
-		messages.add(msg);
+	public static void pushUserMsg(String msg) {
+		userMessages.add(msg);
 	}
 
-	public static List<String> getAllMessages() {
-		return messages;
+	public static List<String> getUserMessages() {
+		return userMessages;
 	}
 
-	public static void clearMessages() {
-		messages.clear();
+	public static void clearUserMessages() {
+		userMessages.clear();
+	}
+
+	public static void pushBotMsg(String msg) {
+		botMessages.add(msg);
+	}
+
+	public static List<String> getBotMessages() {
+		return botMessages;
+	}
+
+	public static void clearBotMessages() {
+		botMessages.clear();
 	}
 
 	public static void informUser(String msg) {
