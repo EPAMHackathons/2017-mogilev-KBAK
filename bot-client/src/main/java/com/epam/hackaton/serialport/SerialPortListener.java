@@ -59,6 +59,7 @@ public class SerialPortListener implements SerialPortEventListener {
 			serialPort.addEventListener(this);
 			serialPort.notifyOnDataAvailable(true);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println(e.toString());
 		}
 	}
