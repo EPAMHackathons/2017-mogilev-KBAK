@@ -26,6 +26,8 @@ public class Job {
     @OneToMany(mappedBy = "job")
     private List<Goal> goals;
 
+    private String userName;
+
     public Long getId() {
         return id;
     }
@@ -74,15 +76,11 @@ public class Job {
         this.goals = goals;
     }
 
-    @Override
-    public String toString() {
-        return "Job{" +
-                "id=" + id +
-                ", jobType=" + jobType +
-                ", shop=" + shop +
-                ", url='" + url + '\'' +
-                ", isCompleted=" + isCompleted +
-                ", goals=" + goals +
-                '}';
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
