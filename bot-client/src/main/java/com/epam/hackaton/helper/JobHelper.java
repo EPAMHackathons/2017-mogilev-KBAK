@@ -1,5 +1,12 @@
 package com.epam.hackaton.helper;
 
+import org.apache.http.HttpResponse;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  * Created by Katsiaryna_Novikava on 4/8/2017.
  */
@@ -41,5 +48,32 @@ public class JobHelper {
                 .append("\",\"data\":\"")
                 .append(data)
                 .append("\"}").toString();
+    }
+
+    public String getValue(HttpResponse response)  {
+
+        String result = "";
+
+        try {
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(
+                    response.getEntity().getContent()));
+
+            String line;
+            while ((line = rd.readLine()) != null) {
+
+                JSONObject obj = new JSONObject(line);
+
+                System.out.println("ob:"+obj.get("result"));
+                result = obj.get("result").toString();
+                System.out.println("res:"+result);
+            }
+
+        }catch (IOException ex){
+
+            System.out.println("Error while checking a job");
+        }
+
+        return result;
     }
 }
