@@ -5,7 +5,7 @@ import com.epam.hackaton.bot.skype.BotSingleton;
 
 public class JobsChecker implements Runnable {
 
-	private static final int INTERVAL = 60000;
+	private static final int INTERVAL = 20000;
 
 	private String user;
 
