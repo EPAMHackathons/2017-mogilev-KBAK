@@ -3,52 +3,51 @@ package com.epam.hackaton.bot.activities;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.epam.hackaton.bot.activities.wb.AddToWaitListActivity;
-import com.epam.hackaton.bot.activities.wb.CheckJobsActivity;
-import com.epam.hackaton.bot.activities.wb.CreateWaitPriceJobActivity;
-import com.epam.hackaton.bot.activities.wb.CreateWaitSizeJobActivity;
-import com.epam.hackaton.bot.activities.wb.DoNotKnowActivity;
+import com.epam.hackaton.bot.activities.wb.*;
 import com.epam.hackaton.bot.skype.BotSingleton;
 
 public class BotActivityHandler {
 
-	private static final Map<String, BotActivity> AVAILABLE_ACTIVITIES = getAvailableActivities();
+    private static final Map<String, BotActivity> AVAILABLE_ACTIVITIES = getAvailableActivities();
 
-	public static final String WAIT = "WAIT";
-	public static final String SIZE = "SIZE";
-	public static final String PRICE = "PRICE";
-	public static final String CHECK = "CHECK";
+    public static final String WAIT = "WAIT";
+    public static final String SIZE = "SIZE";
+    public static final String PRICE = "PRICE";
+    public static final String CHECK = "CHECK";
+    private static final String HELP = "HELP";
+    ///help
 
-	public static void defaultBotActivity() {
-		System.out.println("Default Bot Activity");
+    public static void defaultBotActivity() {
+        System.out.println("Default Bot Activity");
 
-		BotSingleton.informUser("Don't press so hard!");
+        BotSingleton.informUser("Don't press so hard!");
 
-		new CheckJobsActivity().handle(BotSingleton.getCurrentUserToChat(), "");
-	}
+        new CheckJobsActivity().handle(BotSingleton.getCurrentUserToChat(), "");
+    }
 
-	public static void onIncomingMessage(String user, String msg) {
-		System.out.println("On Message: From (" + user + ") - (" + msg + ")");
+    public static void onIncomingMessage(String user, String msg) {
+        System.out.println("On Message: From (" + user + ") - (" + msg + ")");
 
-		BotActivity activity = findAppropriateActivity(msg);
-		activity.handle(user, msg);
-	}
+        BotActivity activity = findAppropriateActivity(msg);
+        activity.handle(user, msg);
+    }
 
-	private static Map<String, BotActivity> getAvailableActivities() {
-		Map<String, BotActivity> activities = new HashMap<String, BotActivity>();
-		activities.put(WAIT, new AddToWaitListActivity());
-		activities.put(SIZE, new CreateWaitSizeJobActivity());
-		activities.put(PRICE, new CreateWaitPriceJobActivity());
-		activities.put(CHECK, new CheckJobsActivity());
-		return activities;
-	}
+    private static Map<String, BotActivity> getAvailableActivities() {
+        Map<String, BotActivity> activities = new HashMap<String, BotActivity>();
+        activities.put(WAIT, new AddToWaitListActivity());
+        activities.put(SIZE, new CreateWaitSizeJobActivity());
+        activities.put(PRICE, new CreateWaitPriceJobActivity());
+        activities.put(CHECK, new CheckJobsActivity());
+        activities.put(HELP, new HelpJobsActivity());
+        return activities;
+    }
 
-	private static BotActivity findAppropriateActivity(String msg) {
-		for(String key : AVAILABLE_ACTIVITIES.keySet()) {
-			if(msg.toLowerCase().contains(key.toLowerCase())) {
-				return AVAILABLE_ACTIVITIES.get(key);
-			}
-		}
-		return new DoNotKnowActivity();
-	}
+    private static BotActivity findAppropriateActivity(String msg) {
+        for (String key : AVAILABLE_ACTIVITIES.keySet()) {
+            if (msg.toLowerCase().contains(key.toLowerCase())) {
+                return AVAILABLE_ACTIVITIES.get(key);
+            }
+        }
+        return new DoNotKnowActivity();
+    }
 }
