@@ -6,6 +6,7 @@ import com.epam.hackaton.bot.gui.listeners.ApplicationStartHandler;
 import com.epam.hackaton.bot.skype.BotSingleton;
 import com.epam.hackaton.utilities.speech.SpeechUtils;
 import com.samczsun.skype4j.Skype;
+import com.samczsun.skype4j.Visibility;
 import com.samczsun.skype4j.user.Contact;
 
 import javafx.application.Application;
@@ -26,13 +27,14 @@ import javafx.stage.WindowEvent;
 
 public class StartWindow extends Application {
 
-	public static final String DEFAULT_USER_TO_WRITE = "hanna.aliakseichykava"; //"live:aleks.anna.ur";
+	public static final String DEFAULT_USER_TO_WRITE = "kanstantsin.tolstsik"; //"live:aleks.anna.ur";
 	public static final String DEFAULT_ARDUINO_PORT = "COM7";
 
 	public static void main(String[] args) throws Exception {
 		try {
 
 			Skype skype = BotSingleton.getSkypeInstance();
+			skype.setVisibility(Visibility.ONLINE);
 
 			Collection<Contact> contacts = skype.getAllContacts();
 			System.out.println("Contacts count: " + contacts.size());
