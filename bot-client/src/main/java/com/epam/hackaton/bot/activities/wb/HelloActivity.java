@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class HelloActivity implements BotActivity {
     private static final String HELLO1 = "Hello! Nice to meet you!";
-    private static final String HELLO2 = "Hi!";
+    private static final String HELLO2 = "Hi! :)";
     private static final String HELLO3 = "Good evening.";
     private static final String[] HELLO = {HELLO1, HELLO2, HELLO3};
 

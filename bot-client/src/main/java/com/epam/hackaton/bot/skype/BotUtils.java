@@ -35,7 +35,7 @@ public class BotUtils {
 	/**
 	 * Not for Guest
 	 */
-	public static Chat createPrivateChat(Skype skype, String friend) throws ConnectionException, ChatNotFoundException {
+	public static synchronized Chat createPrivateChat(Skype skype, String friend) throws ConnectionException, ChatNotFoundException {
 		return skype.getOrLoadContact(friend).getPrivateConversation();
 	}
 
@@ -44,7 +44,7 @@ public class BotUtils {
 	 */
 	public static Chat sendContactRequest(Skype skype, String friend) throws ConnectionException, ChatNotFoundException {
 		Chat chat = createPrivateChat(skype, friend);
-		chat.sendMessage("Hello!");
+		chat.sendMessage("Ping");
 		return chat;
 	}
 

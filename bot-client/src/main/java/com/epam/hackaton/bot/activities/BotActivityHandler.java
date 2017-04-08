@@ -15,7 +15,8 @@ public class BotActivityHandler {
 	public static final String PRICE = "PRICE";
 	public static final String CHECK = "CHECK";
 	public static final String HELLO = "HELLO";
-    public static final String HELP = "HELP";
+	public static final String HI = "HI";
+	public static final String HELP = "HELP";
 
 	public static void defaultBotActivity() {
 		System.out.println("Default Bot Activity");
@@ -39,6 +40,7 @@ public class BotActivityHandler {
 		activities.put(PRICE, new CreateWaitPriceJobActivity());
 		activities.put(CHECK, new CheckJobsActivity());
 		activities.put(HELLO, new HelloActivity());
+		activities.put(HI, new HelloActivity());
 		activities.put(HELP, new HelpJobsActivity());
 		return activities;
 	}

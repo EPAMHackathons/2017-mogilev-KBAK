@@ -23,8 +23,12 @@ public abstract class BaseShopActivity implements BotActivity {
         for (String msg : messages) {
             if (msg.toLowerCase().contains(BotActivityHandler.WAIT.toLowerCase())) {
                 int beginIndex = msg.indexOf("href=");
-                int endIndex = msg.indexOf("\"", beginIndex + 6);
-                result = msg.substring(beginIndex + 6, endIndex);
+                if(beginIndex > 0) {
+                    int endIndex = msg.indexOf("\"", beginIndex + 6);
+                    result = msg.substring(beginIndex + 6, endIndex);
+                } else {
+                    System.out.println("Href is not found: " + msg);
+                }
             }
         }
         return result;
