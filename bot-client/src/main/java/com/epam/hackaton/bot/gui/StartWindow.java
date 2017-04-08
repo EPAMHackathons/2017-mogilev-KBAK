@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import com.epam.hackaton.bot.gui.listeners.ApplicationStartHandler;
 import com.epam.hackaton.bot.skype.BotSingleton;
+import com.epam.hackaton.utilities.speech.SpeechUtils;
 import com.samczsun.skype4j.Skype;
 import com.samczsun.skype4j.user.Contact;
 
@@ -122,6 +123,9 @@ public class StartWindow extends Application {
 				try {
 					Skype skype = BotSingleton.getSkypeInstance();
 					skype.logout();
+
+					SpeechUtils.terminateSpeaker();
+
 					stop();
 
 				} catch (Exception e) {
